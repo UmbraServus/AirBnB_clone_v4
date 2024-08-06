@@ -7,7 +7,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from os import environ
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 app = Flask(__name__)
 # app.jinja_env.trim_blocks = True
 # app.jinja_env.lstrip_blocks = True
@@ -18,6 +18,10 @@ def close_db(error):
     """ Remove the current SQLAlchemy Session """
     storage.close()
 
+@app.route('/')
+def root():
+    """ Redirect root URL to /1-hbnb """
+    return redirect(url_for('hbnb'))
 
 @app.route('/1-hbnb', strict_slashes=False)
 def hbnb():
